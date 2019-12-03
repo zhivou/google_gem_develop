@@ -6,7 +6,8 @@ module Google
                     :publications,
                     :title,
                     :key_words,
-                    :total_citations
+                    :total_citations,
+                    :h_index
 
         def initialize(url)
           @page = Google::Scholar::Helper::Driver.new(url).goto
@@ -14,6 +15,8 @@ module Google
           @title = get_title
           @key_words = get_key_words
           @total_citations = get_total_citations
+          @h_index = get_total_h_index
+          @i10_index = get_total_i10_index
           self
         end
 
@@ -43,6 +46,14 @@ module Google
 
         def get_total_citations
           self.page.search("//a[.='Citations']/../following-sibling::td[1]").text
+        end
+
+        def get_total_h_index
+          self.page.search("//a[.='h-index']/../following-sibling::td[1]").text
+        end
+
+        def get_total_i10_index
+          self.page.search("//a[.='i10-index']/../following-sibling::td[1]").text
         end
       end
     end

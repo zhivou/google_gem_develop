@@ -7,9 +7,6 @@ module Google
   module Scholar
     module Helper
       class Error < StandardError; end
-
-      BASE_URL = 'http://scholar.google.com'
-
     end
   end
 end
